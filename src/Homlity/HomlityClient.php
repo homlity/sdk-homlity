@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Fincaraiz\Sdk\Homlity;
 
+use Fincaraiz\Sdk\Homlity\Api\AnalyticsApi;
 use Fincaraiz\Sdk\Homlity\Api\PropertiesApi;
 use Fincaraiz\Sdk\Homlity\Api\WebhooksApi;
 use Fincaraiz\Sdk\Homlity\Http\CurlHttpClient;
@@ -15,6 +16,7 @@ final class HomlityClient
 {
     private readonly HttpClientInterface $httpClient;
 
+    private ?AnalyticsApi $analytics = null;
     private ?PropertiesApi $properties = null;
     private ?WebhooksApi $webhooks = null;
 
@@ -41,6 +43,15 @@ final class HomlityClient
         }
 
         return $this->properties;
+    }
+
+    public function analytics(): AnalyticsApi
+    {
+        if ($this->analytics === null) {
+            $this->analytics = new AnalyticsApi($this->httpClient);
+        }
+
+        return $this->analytics;
     }
 
     public function webhooks(): WebhooksApi

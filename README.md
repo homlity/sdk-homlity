@@ -192,7 +192,7 @@ El OpenAPI mezcla `apikey` y `X-API-KEY` en distintas secciones. El SDK envia am
 
 Se agregó un namespace paralelo `Fincaraiz\\Sdk\\Homlity\\...` con la misma filosofía de arquitectura:
 - `Config`, `HomlityClient`
-- `Api/BaseApi`, `Api/PropertiesApi`, `Api/WebhooksApi`
+- `Api/BaseApi`, `Api/PropertiesApi`, `Api/WebhooksApi`, `Api/AnalyticsApi`
 - `Http/HttpClientInterface`, `Http/ApiResponse`, `Http/CurlHttpClient`
 - `Exception/*`, `Schema/*`, `Webhook/*`, `Data/*`
 
@@ -205,6 +205,7 @@ $client = new HomlityClient(new Config('api-key', 'https://tu-wp.com'));
 $client->properties()->push([...]);
 $client->properties()->deactivate('12345');
 $client->webhooks()->notify('property.created', '12345');
+$client->analytics()->report(['range' => 30, 'limit' => 20]);
 ```
 
 ### Documentación
@@ -215,3 +216,4 @@ $client->webhooks()->notify('property.created', '12345');
 - `examples/homlity-push-property.php`
 - `examples/homlity-deactivate-property.php`
 - `examples/homlity-webhook.php`
+- `examples/homlity-analytics-report.php`

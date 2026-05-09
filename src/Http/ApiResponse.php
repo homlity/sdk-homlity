@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Fincaraiz\Sdk\Http;
+namespace Homlity\Sdk\Http;
 
 final class ApiResponse
 {

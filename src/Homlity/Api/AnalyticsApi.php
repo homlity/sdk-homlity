@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Fincaraiz\Sdk\Homlity\Api;
+namespace Homlity\Sdk\Homlity\Api;
 
 final class AnalyticsApi extends BaseApi
 {

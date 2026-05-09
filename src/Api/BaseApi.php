@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace Fincaraiz\Sdk\Api;
+namespace Homlity\Sdk\Api;
 
-use Fincaraiz\Sdk\Exception\ApiException;
-use Fincaraiz\Sdk\Http\HttpClientInterface;
+use Homlity\Sdk\Exception\ApiException;
+use Homlity\Sdk\Http\HttpClientInterface;
 
 abstract class BaseApi
 {

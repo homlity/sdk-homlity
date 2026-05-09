@@ -1,6 +1,6 @@
 # API Reference
 
-Fuente: `resources/openapi/fincaraiz-integradores-1.0.0.json` (SwaggerHub Integradores v1.0.0).
+Fuente: `resources/openapi/homlity-integradores-1.0.0.json` (SwaggerHub Integradores v1.0.0).
 
 ## Endpoints cubiertos
 
@@ -18,7 +18,7 @@ Fuente: `resources/openapi/fincaraiz-integradores-1.0.0.json` (SwaggerHub Integr
 | PATCH | `/listing/status` | `listing_status_patch` | `listings()->updateStatus(array $statuses)` |
 | POST | `/validate-listing` | `listing_valdiate_post` | `listings()->validate(array $payload)` |
 | GET | `/task/{task_id}` | `getTask` | `tasks()->get(string $taskId)` |
-| POST | `/api/fincaraiz/` | `postWebhook` | `webhooks()->postEvent(string $hubId, string $verifyToken, array $payload)` |
+| POST | `/api/homlity/` | `postWebhook` | `webhooks()->postEvent(string $hubId, string $verifyToken, array $payload)` |
 | POST | `/webhook/{id}/subscribe` | `postWebhookSubscribe` | `webhooks()->subscribe(string $integratorId, array $payload)` |
 | POST | `/webhook/{id}/unsubscribe` | `postWebhookUnsubscribe` | `webhooks()->unsubscribe(string $integratorId)` |
 
@@ -27,4 +27,4 @@ Fuente: `resources/openapi/fincaraiz-integradores-1.0.0.json` (SwaggerHub Integr
 - Header obligatorio de autenticacion para casi todos los endpoints: `apikey`.
 - El SDK envia automaticamente `apikey` y `X-API-KEY` con el token configurado.
 - Endpoint `GET /listing` exige adicionalmente header `Cookie`.
-- Endpoint `POST /api/fincaraiz/` usa headers `HUB.ID` y `VERIFY-TOKEN`.
+- Endpoint `POST /api/homlity/` usa headers `HUB.ID` y `VERIFY-TOKEN`.

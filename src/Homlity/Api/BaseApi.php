@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace Fincaraiz\Sdk\Homlity\Api;
+namespace Homlity\Sdk\Homlity\Api;
 
-use Fincaraiz\Sdk\Homlity\Exception\ApiException;
-use Fincaraiz\Sdk\Homlity\Http\HttpClientInterface;
+use Homlity\Sdk\Homlity\Exception\ApiException;
+use Homlity\Sdk\Homlity\Http\HttpClientInterface;
 
 abstract class BaseApi
 {

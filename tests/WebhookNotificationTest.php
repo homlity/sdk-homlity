@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace Fincaraiz\Sdk\Tests;
+namespace Homlity\Sdk\Tests;
 
-use Fincaraiz\Sdk\Exception\WebhookException;
-use Fincaraiz\Sdk\Webhook\WebhookNotification;
+use Homlity\Sdk\Exception\WebhookException;
+use Homlity\Sdk\Webhook\WebhookNotification;
 use PHPUnit\Framework\TestCase;
 
 final class WebhookNotificationTest extends TestCase

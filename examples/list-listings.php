@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 require __DIR__ . '/../vendor/autoload.php';
 
-use Fincaraiz\Sdk\Config;
-use Fincaraiz\Sdk\FincaRaizClient;
+use Homlity\Sdk\Config;
+use Homlity\Sdk\HomlityClient;
 
 $config = new Config(
     apiKey: getenv('FINCARAIZ_API_KEY') ?: '',
@@ -13,7 +13,7 @@ $config = new Config(
     timeoutSeconds: 30
 );
 
-$sdk = new FincaRaizClient($config);
+$sdk = new HomlityClient($config);
 
 $clientCookie = getenv('FINCARAIZ_CLIENT_COOKIE') ?: '';
 

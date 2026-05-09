@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 require __DIR__ . '/../vendor/autoload.php';
 
-use Fincaraiz\Sdk\Exception\WebhookException;
-use Fincaraiz\Sdk\Webhook\WebhookNotification;
+use Homlity\Sdk\Exception\WebhookException;
+use Homlity\Sdk\Webhook\WebhookNotification;
 
 $expectedHubId = getenv('FINCARAIZ_WEBHOOK_HUB_ID') ?: '';
 $expectedVerifyToken = getenv('FINCARAIZ_WEBHOOK_VERIFY_TOKEN') ?: '';

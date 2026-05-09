@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace Fincaraiz\Sdk\Api;
+namespace Homlity\Sdk\Api;
 
-use Fincaraiz\Sdk\Data\TaskSnapshot;
+use Homlity\Sdk\Data\TaskSnapshot;
 
 final class TasksApi extends BaseApi
 {

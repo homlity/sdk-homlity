@@ -2,15 +2,15 @@
 
 declare(strict_types=1);
 
-namespace Fincaraiz\Sdk\Homlity;
+namespace Homlity\Sdk\Homlity;
 
-use Fincaraiz\Sdk\Homlity\Api\AnalyticsApi;
-use Fincaraiz\Sdk\Homlity\Api\PropertiesApi;
-use Fincaraiz\Sdk\Homlity\Api\WebhooksApi;
-use Fincaraiz\Sdk\Homlity\Http\CurlHttpClient;
-use Fincaraiz\Sdk\Homlity\Http\HttpClientInterface;
-use Fincaraiz\Sdk\Homlity\Schema\PropertyPayloadNormalizer;
-use Fincaraiz\Sdk\Homlity\Schema\PropertyPayloadValidator;
+use Homlity\Sdk\Homlity\Api\AnalyticsApi;
+use Homlity\Sdk\Homlity\Api\PropertiesApi;
+use Homlity\Sdk\Homlity\Api\WebhooksApi;
+use Homlity\Sdk\Homlity\Http\CurlHttpClient;
+use Homlity\Sdk\Homlity\Http\HttpClientInterface;
+use Homlity\Sdk\Homlity\Schema\PropertyPayloadNormalizer;
+use Homlity\Sdk\Homlity\Schema\PropertyPayloadValidator;
 
 final class HomlityClient
 {
@@ -37,6 +37,7 @@ final class HomlityClient
         if ($this->properties === null) {
             $this->properties = new PropertiesApi(
                 $this->httpClient,
+                $this->config,
                 new PropertyPayloadValidator(),
                 new PropertyPayloadNormalizer(),
             );

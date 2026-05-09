@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Fincaraiz\Sdk\Exception;
+namespace Homlity\Sdk\Exception;
 
 final class WebhookException extends \RuntimeException
 {

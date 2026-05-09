@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace Fincaraiz\Sdk\Api;
+namespace Homlity\Sdk\Api;
 
-use Fincaraiz\Sdk\Webhook\SubscriptionResult;
-use Fincaraiz\Sdk\Webhook\WebhookSubscription;
+use Homlity\Sdk\Webhook\SubscriptionResult;
+use Homlity\Sdk\Webhook\WebhookSubscription;
 
 final class WebhooksApi extends BaseApi
 {
@@ -22,7 +22,7 @@ final class WebhooksApi extends BaseApi
     }
 
     /**
-     * Convenience wrapper for the common subscription body expected by FincaRaiz.
+     * Convenience wrapper for the common subscription body expected by Homlity.
      */
     public function subscribeTarget(string $integratorId, string $targetUrl): mixed
     {
@@ -32,7 +32,7 @@ final class WebhooksApi extends BaseApi
     /**
      * Subscribe only when the target URL has changed from the last known value.
      *
-     * Because FincaRaiz has no GET endpoint to query the current subscription,
+     * Because Homlity has no GET endpoint to query the current subscription,
      * the caller must supply $knownUrl (the URL stored after the previous
      * successful call) so the SDK can decide whether an API call is needed.
      *
@@ -40,12 +40,12 @@ final class WebhooksApi extends BaseApi
      *
      *   $result = $sdk->webhooks()->subscribeTargetIfChanged(
      *       integratorId: $id,
-     *       targetUrl: 'https://myapp.com/webhooks/fincaraiz',
-     *       knownUrl: Cache::get('fincaraiz_webhook_url'),
+     *       targetUrl: 'https://myapp.com/webhooks/homlity',
+     *       knownUrl: Cache::get('homlity_webhook_url'),
      *   );
      *
      *   if ($result->subscribed) {
-     *       Cache::set('fincaraiz_webhook_url', $result->url);
+     *       Cache::set('homlity_webhook_url', $result->url);
      *   }
      *
      * @param string|null $knownUrl Last URL successfully subscribed, or null if unknown.
@@ -75,7 +75,7 @@ final class WebhooksApi extends BaseApi
     }
 
     /**
-     * POST /api/fincaraiz/
+     * POST /api/homlity/
      *
      * Used for webhook event delivery/verification headers defined by OpenAPI.
      *
@@ -83,7 +83,7 @@ final class WebhooksApi extends BaseApi
      */
     public function postEvent(string $hubId, string $verifyToken, array $payload): mixed
     {
-        return $this->send('POST', '/api/fincaraiz/', [
+        return $this->send('POST', '/api/homlity/', [
             'headers' => [
                 'HUB.ID' => $hubId,
                 'VERIFY-TOKEN' => $verifyToken,

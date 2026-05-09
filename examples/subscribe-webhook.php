@@ -4,14 +4,14 @@ declare(strict_types=1);
 
 require __DIR__ . '/../vendor/autoload.php';
 
-use Fincaraiz\Sdk\Config;
-use Fincaraiz\Sdk\FincaRaizClient;
+use Homlity\Sdk\Config;
+use Homlity\Sdk\HomlityClient;
 
 $apiKey = getenv('FINCARAIZ_API_KEY') ?: '';
 $webhookId = getenv('FINCARAIZ_WEBHOOK_ID') ?: '';
 $targetUrl = getenv('FINCARAIZ_WEBHOOK_TARGET') ?: '';
 
-$sdk = new FincaRaizClient(new Config($apiKey));
+$sdk = new HomlityClient(new Config($apiKey));
 
 $response = $sdk->webhooks()->subscribeTarget($webhookId, $targetUrl);
 

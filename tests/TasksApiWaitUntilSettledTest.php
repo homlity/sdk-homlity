@@ -2,13 +2,13 @@
 
 declare(strict_types=1);
 
-namespace Fincaraiz\Sdk\Tests;
+namespace Homlity\Sdk\Tests;
 
-use Fincaraiz\Sdk\Api\TasksApi;
-use Fincaraiz\Sdk\Data\TaskSnapshot;
-use Fincaraiz\Sdk\Data\TaskStatus;
-use Fincaraiz\Sdk\Http\ApiResponse;
-use Fincaraiz\Sdk\Http\HttpClientInterface;
+use Homlity\Sdk\Api\TasksApi;
+use Homlity\Sdk\Data\TaskSnapshot;
+use Homlity\Sdk\Data\TaskStatus;
+use Homlity\Sdk\Http\ApiResponse;
+use Homlity\Sdk\Http\HttpClientInterface;
 use PHPUnit\Framework\TestCase;
 
 /**

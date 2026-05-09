@@ -1,6 +1,6 @@
-# FincaRaiz PHP SDK Desarrollado por codwelt Sas
+# Homlity PHP SDK Desarrollado por codwelt Sas
 
-SDK en PHP para integracion con el API de Integradores de Finca Raiz.
+SDK en PHP para integracion con el API de Integradores de Homlity.
 Incluye: 
 - Cliente HTTP con cURL y manejo de errores.
 - Modulos por recurso (`listings`, `clients`, `categories`, `locations`, `tasks`, `webhooks`).
@@ -11,7 +11,7 @@ Incluye:
 ## Instalacion
 
 ```bash
-composer require fincaraiz/sdk-php
+composer require homlity/sdk-php
 ```
 
 ## Uso rapido
@@ -21,8 +21,8 @@ composer require fincaraiz/sdk-php
 
 require __DIR__ . '/vendor/autoload.php';
 
-use Fincaraiz\Sdk\Config;
-use Fincaraiz\Sdk\FincaRaizClient;
+use Homlity\Sdk\Config;
+use Homlity\Sdk\HomlityClient;
 
 $config = new Config(
     apiKey: 'TU_API_KEY',
@@ -30,7 +30,7 @@ $config = new Config(
     timeoutSeconds: 30
 );
 
-$sdk = new FincaRaizClient($config);
+$sdk = new HomlityClient($config);
 
 $clients = $sdk->clients()->all();
 print_r($clients);
@@ -106,7 +106,7 @@ $detail = $sdk->listings()->get('78bea79c-1f6b-4e6d-a800-43fb327ed7c5');
 - Endpoints completos: `docs/api-reference.md`
 - Parametros para creacion y consulta de inmuebles: `docs/listing-parameters.md`
 - Webhooks y recepcion de tareas: `docs/webhooks.md`
-- Snapshot OpenAPI usado por el SDK: `resources/openapi/fincaraiz-integradores-1.0.0.json`
+- Snapshot OpenAPI usado por el SDK: `resources/openapi/homlity-integradores-1.0.0.json`
 
 ## Recursos disponibles en el SDK
 
@@ -128,7 +128,7 @@ Suscribir el endpoint del integrador:
 
 $sdk->webhooks()->subscribeTarget(
     integratorId: '696d939e-4cc3-43ac-a312-6bf2e7f15868',
-    targetUrl: 'https://midominio.com/webhooks/fincaraiz'
+    targetUrl: 'https://midominio.com/webhooks/homlity'
 );
 ```
 
@@ -137,7 +137,7 @@ Procesar el callback entrante:
 ```php
 <?php
 
-use Fincaraiz\Sdk\Webhook\WebhookNotification;
+use Homlity\Sdk\Webhook\WebhookNotification;
 
 $notification = WebhookNotification::fromGlobals();
 $notification->assertAuthorized(
@@ -152,7 +152,7 @@ if ($notification->isListingStatusEvent()) {
 
 ### Suscribir solo si cambió la URL
 
-La API de FincaRaiz no expone un GET para consultar la suscripción activa, por lo
+La API de Homlity no expone un GET para consultar la suscripción activa, por lo
 que el SDK implementa "desired state" con `subscribeTargetIfChanged()`. El integrador
 guarda la URL conocida y la pasa en cada llamada; el SDK evita el POST si no hay
 cambio.
@@ -160,22 +160,22 @@ cambio.
 ```php
 <?php
 
-use Fincaraiz\Sdk\Webhook\SubscriptionResult;
+use Homlity\Sdk\Webhook\SubscriptionResult;
 
 // $knownUrl es la URL que guardaste la última vez que suscribiste con éxito.
 // Puede venir de tu base de datos, cache, variable de entorno, etc.
-$knownUrl = Cache::get('fincaraiz_webhook_url');
+$knownUrl = Cache::get('homlity_webhook_url');
 
 $result = $sdk->webhooks()->subscribeTargetIfChanged(
     integratorId: '696d939e-4cc3-43ac-a312-6bf2e7f15868',
-    targetUrl: 'https://midominio.com/webhooks/fincaraiz',
+    targetUrl: 'https://midominio.com/webhooks/homlity',
     knownUrl: $knownUrl,
 );
 
 if ($result->subscribed) {
     // Solo llega aquí si la URL era diferente o desconocida.
     // Persiste la nueva URL para evitar re-suscripciones futuras.
-    Cache::set('fincaraiz_webhook_url', $result->url);
+    Cache::set('homlity_webhook_url', $result->url);
 }
 ```
 
@@ -190,7 +190,7 @@ El OpenAPI mezcla `apikey` y `X-API-KEY` en distintas secciones. El SDK envia am
 
 ## Homlity SDK
 
-Se agregó un namespace paralelo `Fincaraiz\\Sdk\\Homlity\\...` con la misma filosofía de arquitectura:
+Se agregó un namespace paralelo `Homlity\\Sdk\\Homlity\\...` con la misma filosofía de arquitectura:
 - `Config`, `HomlityClient`
 - `Api/BaseApi`, `Api/PropertiesApi`, `Api/WebhooksApi`, `Api/AnalyticsApi`
 - `Http/HttpClientInterface`, `Http/ApiResponse`, `Http/CurlHttpClient`
@@ -198,8 +198,8 @@ Se agregó un namespace paralelo `Fincaraiz\\Sdk\\Homlity\\...` con la misma fil
 
 ### Uso básico
 ```php
-use Fincaraiz\Sdk\Homlity\Config;
-use Fincaraiz\Sdk\Homlity\HomlityClient;
+use Homlity\Sdk\Homlity\Config;
+use Homlity\Sdk\Homlity\HomlityClient;
 
 $client = new HomlityClient(new Config('api-key', 'https://tu-wp.com'));
 $client->properties()->push([...]);
@@ -207,6 +207,39 @@ $client->properties()->deactivate('12345');
 $client->webhooks()->notify('property.created', '12345');
 $client->analytics()->report(['range' => 30, 'limit' => 20]);
 ```
+
+### Firma nativa en `/properties` y `/deactivate`
+
+El SDK firma nativamente:
+- `POST /wp-json/homlity-sync/v1/properties`
+- `POST /wp-json/homlity-sync/v1/properties/{id}/deactivate`
+
+Headers enviados en estos endpoints:
+- `X-Homlity-Token: <apiKey>`
+- `X-Homlity-Signature: sha256=<hex_hmac>`
+
+La firma se calcula sobre el body exacto que se envía:
+```php
+$signature = 'sha256=' . hash_hmac('sha256', $rawJsonBody, $apiKey);
+```
+
+Comportamiento por defecto:
+- `signPropertyRequests = true`
+- `retrySignedOnSignatureRequired = true`
+
+Puedes ajustar esto en `Config`:
+```php
+$config = new Config(
+    apiKey: 'api-key',
+    baseUrl: 'https://tu-wp.com',
+    timeoutSeconds: 30,
+    signPropertyRequests: true,
+    retrySignedOnSignatureRequired: true
+);
+```
+
+Si `signPropertyRequests=false` y el servidor responde `401` con `"Firma requerida"`,
+el SDK puede reintentar firmado automáticamente si `retrySignedOnSignatureRequired=true`.
 
 ### Documentación
 - `docs/homlity-api-reference.md`

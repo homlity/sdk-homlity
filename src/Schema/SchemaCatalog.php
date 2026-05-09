@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Fincaraiz\Sdk\Schema;
+namespace Homlity\Sdk\Schema;
 
 final class SchemaCatalog
 {
@@ -168,6 +168,6 @@ final class SchemaCatalog
 
     private function defaultOpenApiPath(): string
     {
-        return \dirname(__DIR__, 2) . '/resources/openapi/fincaraiz-integradores-1.0.0.json';
+        return \dirname(__DIR__, 2) . '/resources/openapi/homlity-integradores-1.0.0.json';
     }
 }

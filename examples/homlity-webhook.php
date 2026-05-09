@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 require __DIR__ . '/../vendor/autoload.php';
 
-use Fincaraiz\Sdk\Homlity\Webhook\WebhookNotification;
+use Homlity\Sdk\Homlity\Webhook\WebhookNotification;
 
 $rawBody = file_get_contents('php://input') ?: '';
 $headers = function_exists('getallheaders') && is_array(getallheaders()) ? getallheaders() : [];

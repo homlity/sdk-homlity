@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace Fincaraiz\Sdk\Tests;
+namespace Homlity\Sdk\Tests;
 
-use Fincaraiz\Sdk\Webhook\WebhookSubscription;
+use Homlity\Sdk\Webhook\WebhookSubscription;
 use PHPUnit\Framework\TestCase;
 
 final class WebhookSubscriptionTest extends TestCase
@@ -12,8 +12,8 @@ final class WebhookSubscriptionTest extends TestCase
     public function testItBuildsTheExpectedSubscriptionPayload(): void
     {
         self::assertSame(
-            ['target' => 'https://example.com/webhooks/fincaraiz'],
-            WebhookSubscription::target('https://example.com/webhooks/fincaraiz')
+            ['target' => 'https://example.com/webhooks/homlity'],
+            WebhookSubscription::target('https://example.com/webhooks/homlity')
         );
     }
 

@@ -2,14 +2,14 @@
 
 declare(strict_types=1);
 
-namespace Fincaraiz\Sdk\Homlity\Api;
+namespace Homlity\Sdk\Homlity\Api;
 
-use Fincaraiz\Sdk\Homlity\Schema\PropertyPayloadValidator;
+use Homlity\Sdk\Homlity\Schema\PropertyPayloadValidator;
 
 final class WebhooksApi extends BaseApi
 {
     public function __construct(
-        \Fincaraiz\Sdk\Homlity\Http\HttpClientInterface $httpClient,
+        \Homlity\Sdk\Homlity\Http\HttpClientInterface $httpClient,
         private readonly PropertyPayloadValidator $validator,
     ) {
         parent::__construct($httpClient);

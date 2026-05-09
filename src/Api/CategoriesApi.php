@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Fincaraiz\Sdk\Api;
+namespace Homlity\Sdk\Api;
 
 final class CategoriesApi extends BaseApi
 {

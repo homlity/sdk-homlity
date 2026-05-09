@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Fincaraiz\Sdk\Homlity\Data;
+namespace Homlity\Sdk\Homlity\Data;
 
 final class PropertySnapshot
 {

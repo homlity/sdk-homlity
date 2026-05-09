@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Fincaraiz\Sdk\Homlity\Schema;
+namespace Homlity\Sdk\Homlity\Schema;
 
 final class PropertyPayloadNormalizer
 {

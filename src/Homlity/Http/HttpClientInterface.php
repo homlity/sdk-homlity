@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Fincaraiz\Sdk\Homlity\Http;
+namespace Homlity\Sdk\Homlity\Http;
 
 interface HttpClientInterface
 {

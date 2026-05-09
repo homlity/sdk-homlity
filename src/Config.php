@@ -2,13 +2,13 @@
 
 declare(strict_types=1);
 
-namespace Fincaraiz\Sdk;
+namespace Homlity\Sdk;
 
 final class Config
 {
-    public const BASE_URL_PRODUCTION = 'https://kong.fincaraiz.com.co/management/api/1.0';
+    public const BASE_URL_PRODUCTION = 'https://kong.homlity.com.co/management/api/1.0';
     public const BASE_URL_QA = 'https://kong-qa.frcol.io/management/api/1.0';
-    public const BASE_URL_MOCK = 'https://virtserver.swaggerhub.com/Fincaraiz.com.co/Integradores/1.0.0';
+    public const BASE_URL_MOCK = 'https://virtserver.swaggerhub.com/Homlity.com.co/Integradores/1.0.0';
 
     public function __construct(
         private readonly string $apiKey,

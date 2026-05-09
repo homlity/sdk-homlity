@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Fincaraiz\Sdk\Schema;
+namespace Homlity\Sdk\Schema;
 
 final class ListingPayloadValidator
 {

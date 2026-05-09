@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace Fincaraiz\Sdk\Data;
+namespace Homlity\Sdk\Data;
 
 /**
- * Estado de una tarea en la API de FincaRaiz.
+ * Estado de una tarea en la API de Homlity.
  *
  * El ciclo habitual es: READY → RUNNING → COMPLETED | FORWARDED | ERROR
  */

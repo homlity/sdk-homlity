@@ -2,20 +2,20 @@
 
 declare(strict_types=1);
 
-namespace Fincaraiz\Sdk;
+namespace Homlity\Sdk;
 
-use Fincaraiz\Sdk\Api\CategoriesApi;
-use Fincaraiz\Sdk\Api\ClientsApi;
-use Fincaraiz\Sdk\Api\ListingsApi;
-use Fincaraiz\Sdk\Api\LocationsApi;
-use Fincaraiz\Sdk\Api\TasksApi;
-use Fincaraiz\Sdk\Api\WebhooksApi;
-use Fincaraiz\Sdk\Http\CurlHttpClient;
-use Fincaraiz\Sdk\Http\HttpClientInterface;
-use Fincaraiz\Sdk\Schema\ListingPayloadValidator;
-use Fincaraiz\Sdk\Schema\SchemaCatalog;
+use Homlity\Sdk\Api\CategoriesApi;
+use Homlity\Sdk\Api\ClientsApi;
+use Homlity\Sdk\Api\ListingsApi;
+use Homlity\Sdk\Api\LocationsApi;
+use Homlity\Sdk\Api\TasksApi;
+use Homlity\Sdk\Api\WebhooksApi;
+use Homlity\Sdk\Http\CurlHttpClient;
+use Homlity\Sdk\Http\HttpClientInterface;
+use Homlity\Sdk\Schema\ListingPayloadValidator;
+use Homlity\Sdk\Schema\SchemaCatalog;
 
-final class FincaRaizClient
+final class HomlityClient
 {
     private readonly HttpClientInterface $httpClient;
     private readonly SchemaCatalog $schemaCatalog;

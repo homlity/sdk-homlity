@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace Fincaraiz\Sdk\Homlity\Http;
+namespace Homlity\Sdk\Homlity\Http;
 
-use Fincaraiz\Sdk\Homlity\Config;
-use Fincaraiz\Sdk\Homlity\Exception\TransportException;
+use Homlity\Sdk\Homlity\Config;
+use Homlity\Sdk\Homlity\Exception\TransportException;
 
 final class CurlHttpClient implements HttpClientInterface
 {

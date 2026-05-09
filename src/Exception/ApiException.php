@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace Fincaraiz\Sdk\Exception;
+namespace Homlity\Sdk\Exception;
 
-use Fincaraiz\Sdk\Http\ApiResponse;
+use Homlity\Sdk\Http\ApiResponse;
 
 class ApiException extends \RuntimeException
 {
@@ -98,7 +98,7 @@ class ApiException extends \RuntimeException
     /**
      * Primer mensaje de error legible del cuerpo JSON.
      *
-     * Intenta los formatos más comunes que usa FincaRaiz:
+     * Intenta los formatos más comunes que usa Homlity:
      * `message`, `errors[0]`, `errors[0].message`, `detail`.
      */
     public function firstErrorMessage(): ?string

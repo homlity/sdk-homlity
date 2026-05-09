@@ -1,7 +1,7 @@
 # Homlity API Reference
 
 ## Base URL
-Configurable via `Fincaraiz\Sdk\Homlity\Config`.
+Configurable via `Homlity\Sdk\Homlity\Config`.
 
 ## Endpoints
 - `POST /wp-json/homlity-sync/v1/properties`
@@ -9,10 +9,33 @@ Configurable via `Fincaraiz\Sdk\Homlity\Config`.
 - `POST /wp-json/homlity-sync/v1/webhook`
 - `GET /wp-json/homlity-sync/v1/analytics/report`
 
+## Firma HMAC para properties/deactivate
+
+Para estos endpoints el SDK puede enviar firma nativa:
+- `POST /wp-json/homlity-sync/v1/properties`
+- `POST /wp-json/homlity-sync/v1/properties/{id}/deactivate`
+
+Headers:
+- `X-Homlity-Token: <apiKey>`
+- `X-Homlity-Signature: sha256=<hex_hmac>`
+- `Authorization: Bearer <apiKey>` (ya existente en transporte)
+
+Algoritmo:
+```php
+$rawJsonBody = '...json exacto enviado...';
+$signature = 'sha256=' . hash_hmac('sha256', $rawJsonBody, $apiKey);
+```
+
+Notas:
+- La firma se calcula sobre el body exacto enviado por HTTP.
+- `deactivate()` con payload vacío firma y envía body vacío (`''`).
+- Si se desactiva firma inicial y el servidor responde `401 "Firma requerida"`,
+  el SDK puede reintentar firmado según configuración.
+
 ## Cliente
 ```php
-$client = new \Fincaraiz\Sdk\Homlity\HomlityClient(
-    new \Fincaraiz\Sdk\Homlity\Config('api-key', 'https://tu-wp.com')
+$client = new \Homlity\Sdk\Homlity\HomlityClient(
+    new \Homlity\Sdk\Homlity\Config('api-key', 'https://tu-wp.com')
 );
 ```
 

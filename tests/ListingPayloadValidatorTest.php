@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace Fincaraiz\Sdk\Tests;
+namespace Homlity\Sdk\Tests;
 
-use Fincaraiz\Sdk\Schema\ListingPayloadValidator;
-use Fincaraiz\Sdk\Schema\SchemaCatalog;
+use Homlity\Sdk\Schema\ListingPayloadValidator;
+use Homlity\Sdk\Schema\SchemaCatalog;
 use PHPUnit\Framework\TestCase;
 
 final class ListingPayloadValidatorTest extends TestCase

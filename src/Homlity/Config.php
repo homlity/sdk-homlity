@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Fincaraiz\Sdk\Homlity;
+namespace Homlity\Sdk\Homlity;
 
 final class Config
 {
@@ -11,7 +11,9 @@ final class Config
     public function __construct(
         private readonly string $apiKey,
         private readonly string $baseUrl,
-        private readonly int $timeoutSeconds = 30
+        private readonly int $timeoutSeconds = 30,
+        private readonly bool $signPropertyRequests = true,
+        private readonly bool $retrySignedOnSignatureRequired = true
     ) {
         if ($this->apiKey === '') {
             throw new \InvalidArgumentException('API key is required.');
@@ -39,5 +41,15 @@ final class Config
     public function timeoutSeconds(): int
     {
         return $this->timeoutSeconds;
+    }
+
+    public function signPropertyRequests(): bool
+    {
+        return $this->signPropertyRequests;
+    }
+
+    public function retrySignedOnSignatureRequired(): bool
+    {
+        return $this->retrySignedOnSignatureRequired;
     }
 }

@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace Fincaraiz\Sdk\Tests\Homlity;
+namespace Homlity\Sdk\Tests\Homlity;
 
-use Fincaraiz\Sdk\Homlity\Schema\PropertyPayloadValidator;
+use Homlity\Sdk\Homlity\Schema\PropertyPayloadValidator;
 use PHPUnit\Framework\TestCase;
 
 final class PropertyPayloadValidatorTest extends TestCase

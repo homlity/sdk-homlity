@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Fincaraiz\Sdk\Homlity\Exception;
+namespace Homlity\Sdk\Homlity\Exception;
 
 final class TransportException extends \RuntimeException
 {

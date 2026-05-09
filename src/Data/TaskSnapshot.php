@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Fincaraiz\Sdk\Data;
+namespace Homlity\Sdk\Data;
 
 /**
  * Snapshot tipado de una tarea devuelta por GET /task/{task_id}.

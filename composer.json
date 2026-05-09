@@ -1,6 +1,6 @@
 {
-  "name": "fincaraiz/sdk-php",
-  "description": "SDK PHP para integracion con la API de Finca Raiz (Integradores)",
+  "name": "homlity/sdk-php",
+  "description": "SDK PHP para integracion con la API de Homlity (Integradores)",
   "type": "library",
   "license": "MIT",
   "require": {
@@ -13,12 +13,12 @@
   },
   "autoload": {
     "psr-4": {
-      "Fincaraiz\\Sdk\\": "src/"
+      "Homlity\\Sdk\\": "src/"
     }
   },
   "autoload-dev": {
     "psr-4": {
-      "Fincaraiz\\Sdk\\Tests\\": "tests/"
+      "Homlity\\Sdk\\Tests\\": "tests/"
     }
   },
   "scripts": {

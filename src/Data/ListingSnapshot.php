@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Fincaraiz\Sdk\Data;
+namespace Homlity\Sdk\Data;
 
 /**
  * Snapshot tipado de un inmueble devuelto por GET /listing/{listing_id}

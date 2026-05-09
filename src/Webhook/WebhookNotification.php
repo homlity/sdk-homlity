@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace Fincaraiz\Sdk\Webhook;
+namespace Homlity\Sdk\Webhook;
 
-use Fincaraiz\Sdk\Exception\WebhookException;
+use Homlity\Sdk\Exception\WebhookException;
 
 final class WebhookNotification
 {

@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace Fincaraiz\Sdk\Data;
+namespace Homlity\Sdk\Data;
 
 /**
- * Estado interno de un inmueble devuelto por la API de FincaRaiz
+ * Estado interno de un inmueble devuelto por la API de Homlity
  * (campo `status` en las respuestas GET /listing).
  *
  * Nota: el endpoint PATCH /listing/status recibe los strings "ACTIVE" / "DELETED",

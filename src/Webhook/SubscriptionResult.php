@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Fincaraiz\Sdk\Webhook;
+namespace Homlity\Sdk\Webhook;
 
 /**
  * Result of a subscribeTargetIfChanged() call.

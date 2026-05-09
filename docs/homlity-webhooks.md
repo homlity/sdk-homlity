@@ -8,7 +8,7 @@ Firma:
 
 Validación en SDK:
 ```php
-$notification = \Fincaraiz\Sdk\Homlity\Webhook\WebhookNotification::fromRequest($rawBody, getallheaders());
+$notification = \Homlity\Sdk\Homlity\Webhook\WebhookNotification::fromRequest($rawBody, getallheaders());
 $notification->assertAuthorizedSignature($_ENV['HOMLITY_WEBHOOK_SECRET']);
 ```
 

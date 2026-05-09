@@ -2,15 +2,15 @@
 
 declare(strict_types=1);
 
-namespace Fincaraiz\Sdk\Api;
+namespace Homlity\Sdk\Api;
 
-use Fincaraiz\Sdk\Data\ListingSnapshot;
-use Fincaraiz\Sdk\Schema\ListingPayloadValidator;
+use Homlity\Sdk\Data\ListingSnapshot;
+use Homlity\Sdk\Schema\ListingPayloadValidator;
 
 final class ListingsApi extends BaseApi
 {
     public function __construct(
-        \Fincaraiz\Sdk\Http\HttpClientInterface $httpClient,
+        \Homlity\Sdk\Http\HttpClientInterface $httpClient,
         private readonly ListingPayloadValidator $validator
     ) {
         parent::__construct($httpClient);

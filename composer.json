@@ -1,5 +1,5 @@
 {
-  "name": "homlity/sdk-php",
+  "name": "homlity/sdk-homlity",
   "description": "SDK PHP para integracion con la API de Homlity (Integradores)",
   "type": "library",
   "license": "MIT",

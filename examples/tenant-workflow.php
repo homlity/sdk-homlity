@@ -23,6 +23,13 @@ if (!$token || !$document || !$email) {
 }
 
 $sdk = new HomlityClient(Config::forTenantApi($token));
+$profile = $sdk->company()->profile();
+
+printf(
+    "Inmobiliaria %d: %s.\n",
+    $profile->id(),
+    $profile->name() ?? 'Sin nombre público',
+);
 
 $properties = $sdk->properties()->search(new PropertyFilters(
     search: getenv('HOMLITY_PROPERTY_SEARCH') ?: 'apartamento',

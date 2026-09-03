@@ -2,7 +2,7 @@
   <img src="assets/homlity-developers.png" width="360" alt="Homlity para desarrolladores">
 </p>
 
-# Recursos tenant: inmuebles, tickets, clientes y leads
+# Recursos tenant: perfil, inmuebles, tickets, clientes y leads
 
 [Inicio](index.md) · [Clases y métodos](public-api.md) · [Mapa de endpoints](api-reference.md)
 
@@ -33,6 +33,7 @@ La configuración histórica `new Config(apiKey: ...)` conserva los headers
 
 | SDK | HTTP | Aislamiento observado en backend |
 | --- | --- | --- |
+| `company()->profile` | `GET /v1/inmobiliaria/profile` | inmobiliaria derivada exclusivamente de `Auth::user()->id_inmobiliaria` |
 | `properties()->list/search` | `GET /v1/propertys` | `where('id_inmobiliaria', Auth::user()->id_inmobiliaria)` |
 | `properties()->get/getByCode` | `GET /v1/integrations/properties/{id_or_code}` | ID/código buscado dentro del tenant autenticado |
 | `tickets()->create` | `POST /v1/tickets` | el backend asigna `id_inmobiliaria` desde el usuario |
@@ -43,6 +44,30 @@ La configuración histórica `new Config(apiKey: ...)` conserva los headers
 | relación lead/cliente | `POST /v1/leads/{id}/attach-client` | lead y cliente deben pertenecer al tenant autenticado |
 
 No se usan rutas inferidas ni se envían campos desconocidos al backend.
+
+## Perfil de la inmobiliaria
+
+El perfil público se consulta en vivo para el tenant representado por el token:
+
+```php
+$profile = $sdk->company()->profile();
+
+echo $profile->id();
+echo $profile->name();
+echo $profile->phone();
+echo $profile->email();
+echo $profile->address();
+echo $profile->city();
+echo $profile->publicUrl();
+
+foreach ($profile->businessHours() as $day => $hours) {
+    // La estructura de horarios se conserva tal como la publica Homlity.
+}
+```
+
+`CompanyProfile` es inmutable. Los datos de contacto ausentes son `null` y
+`businessHours()` devuelve un arreglo vacío cuando no hay horarios. El DTO no
+contiene credenciales ni datos internos del usuario.
 
 ## Inmuebles
 

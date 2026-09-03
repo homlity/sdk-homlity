@@ -20,6 +20,7 @@ su lógica de negocio y no en reconstruir la comunicación con cada API.
 Con el paquete puedes:
 
 - publicar, actualizar, consultar y desactivar inmuebles;
+- consultar en vivo el perfil público de la inmobiliaria autenticada;
 - buscar inmuebles del tenant autenticado con filtros y paginación;
 - consultar clientes y agentes, y verificar clientes por documento;
 - crear leads y relacionarlos con un inmueble o cliente cuando el backend lo admite;
@@ -70,6 +71,9 @@ use Homlity\Sdk\Request\CreateLeadRequest;
 $sdk = new HomlityClient(
     Config::forTenantApi($_ENV['HOMLITY_ACCESS_TOKEN'])
 );
+
+$profile = $sdk->company()->profile();
+echo $profile->name();
 
 $properties = $sdk->properties()->search(new PropertyFilters(
     search: 'apartamento Laureles',

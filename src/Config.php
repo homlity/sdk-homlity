@@ -82,4 +82,15 @@ final class Config
             'X-API-KEY' => $this->apiKey,
         ];
     }
+
+    /** @return array<string, int|string> */
+    public function __debugInfo(): array
+    {
+        return [
+            'apiKey' => '[REDACTED]',
+            'baseUrl' => $this->baseUrl,
+            'timeoutSeconds' => $this->timeoutSeconds,
+            'authMode' => $this->authMode,
+        ];
+    }
 }

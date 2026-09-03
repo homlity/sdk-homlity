@@ -6,6 +6,7 @@ namespace Homlity\Sdk;
 
 use Homlity\Sdk\Api\CategoriesApi;
 use Homlity\Sdk\Api\ClientsApi;
+use Homlity\Sdk\Api\CompanyApi;
 use Homlity\Sdk\Api\ListingsApi;
 use Homlity\Sdk\Api\LocationsApi;
 use Homlity\Sdk\Api\LeadsApi;
@@ -25,6 +26,7 @@ final class HomlityClient
 
     private ?ListingsApi $listings = null;
     private ?ClientsApi $clients = null;
+    private ?CompanyApi $company = null;
     private ?CategoriesApi $categories = null;
     private ?LocationsApi $locations = null;
     private ?PropertiesApi $properties = null;
@@ -71,6 +73,15 @@ final class HomlityClient
         }
 
         return $this->clients;
+    }
+
+    public function company(): CompanyApi
+    {
+        if ($this->company === null) {
+            $this->company = new CompanyApi($this->httpClient);
+        }
+
+        return $this->company;
     }
 
     public function categories(): CategoriesApi

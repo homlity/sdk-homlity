@@ -1,4 +1,10 @@
-# API Reference
+<p align="center">
+  <img src="assets/homlity-developers.png" width="360" alt="Homlity para desarrolladores">
+</p>
+
+# Mapa de endpoints
+
+[Inicio](index.md) · [Clases y métodos](public-api.md) · [Recursos tenant](tenant-resources.md)
 
 Fuente: `resources/openapi/homlity-integradores-1.0.0.json` (SwaggerHub Integradores v1.0.0).
 
@@ -28,3 +34,40 @@ Fuente: `resources/openapi/homlity-integradores-1.0.0.json` (SwaggerHub Integrad
 - El SDK envia automaticamente `apikey` y `X-API-KEY` con el token configurado.
 - Endpoint `GET /listing` exige adicionalmente header `Cookie`.
 - Endpoint `POST /api/homlity/` usa headers `HUB.ID` y `VERIFY-TOKEN`.
+
+## API tenant de Homlity
+
+Fuente verificada: rutas, controladores, Form Requests y Resources del backend
+`web homlity`. Base URL productiva: `https://web.homlity.com/api`.
+
+| Metodo | Path | Metodo SDK |
+| --- | --- | --- |
+| GET | `/v1/propertys` | `properties()->list()` / `properties()->search(PropertyFilters $filters)` |
+| GET | `/v1/integrations/properties/{id_or_code}` | `properties()->get(int|string $property)` / `getByCode(string $code)` |
+| POST | `/v1/tickets` | `tickets()->create(CreateTicketRequest $request)` |
+| GET | `/v1/tickets` | `tickets()->list(?TicketFilters $filters = null)` |
+| GET | `/v1/tickets/{ticket}` | `tickets()->get(int $ticketId)` |
+| GET | `/v1/clients?q={document}` | `clients()->verifyDocument(string $document, int|string|null $documentType = null)` |
+| POST | `/v1/leads` | `leads()->create(CreateLeadRequest $request)` sin inmueble |
+| POST | `/sistema/inmuebles/{property}/leads` | `leads()->create(CreateLeadRequest $request)` con `propertyId` |
+| POST | `/v1/leads/{lead}/attach-client` | ejecutado por `leads()->create()` cuando existe `clientId` |
+
+Todos requieren Bearer token y el backend resuelve el tenant desde el usuario
+autenticado. Consulta [`tenant-resources.md`](tenant-resources.md) para el
+contrato detallado y sus limitaciones actuales.
+
+## Plugin Homlity para WordPress
+
+La URL base es el dominio del sitio WordPress. Este bloque usa
+`Homlity\Sdk\Homlity\HomlityClient`.
+
+| Método | Path | Método SDK |
+| --- | --- | --- |
+| POST | `/wp-json/homlity-sync/v1/properties` | `properties()->push(array $properties)` |
+| POST | `/wp-json/homlity-sync/v1/properties/{id}/deactivate` | `properties()->deactivate(string $externalId, array $payload = [])` |
+| POST | `/wp-json/homlity-sync/v1/webhook` | `webhooks()->notify(string $event, string $propertyId)` |
+| GET | `/wp-json/homlity-sync/v1/analytics/report` | `analytics()->report(array $filters = [])` |
+
+`push()` y `deactivate()` pueden agregar `X-Homlity-Token` y
+`X-Homlity-Signature`. Consulta la
+[referencia del plugin](homlity-api-reference.md) para payloads, filtros y firma.

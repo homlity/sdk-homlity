@@ -1,4 +1,10 @@
-# Webhooks
+<p align="center">
+  <img src="assets/homlity-developers.png" width="360" alt="Homlity para desarrolladores">
+</p>
+
+# Tareas y webhooks de Integradores
+
+[Inicio](index.md) · [Clases y métodos](public-api.md) · [Mapa de endpoints](api-reference.md)
 
 El flujo real de Homlity para tareas asincrónicas es este:
 

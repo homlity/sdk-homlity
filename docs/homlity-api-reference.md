@@ -1,4 +1,10 @@
-# Homlity API Reference
+<p align="center">
+  <img src="assets/homlity-developers.png" width="360" alt="Homlity para desarrolladores">
+</p>
+
+# API del plugin Homlity para WordPress
+
+[Inicio](index.md) · [Clases y métodos](public-api.md) · [Webhooks WordPress](homlity-webhooks.md)
 
 ## Base URL
 Configurable via `Homlity\Sdk\Homlity\Config`.

@@ -8,7 +8,10 @@ use Homlity\Sdk\Api\CategoriesApi;
 use Homlity\Sdk\Api\ClientsApi;
 use Homlity\Sdk\Api\ListingsApi;
 use Homlity\Sdk\Api\LocationsApi;
+use Homlity\Sdk\Api\LeadsApi;
+use Homlity\Sdk\Api\PropertiesApi;
 use Homlity\Sdk\Api\TasksApi;
+use Homlity\Sdk\Api\TicketsApi;
 use Homlity\Sdk\Api\WebhooksApi;
 use Homlity\Sdk\Http\CurlHttpClient;
 use Homlity\Sdk\Http\HttpClientInterface;
@@ -24,6 +27,9 @@ final class HomlityClient
     private ?ClientsApi $clients = null;
     private ?CategoriesApi $categories = null;
     private ?LocationsApi $locations = null;
+    private ?PropertiesApi $properties = null;
+    private ?TicketsApi $tickets = null;
+    private ?LeadsApi $leads = null;
     private ?TasksApi $tasks = null;
     private ?WebhooksApi $webhooks = null;
 
@@ -83,6 +89,33 @@ final class HomlityClient
         }
 
         return $this->locations;
+    }
+
+    public function properties(): PropertiesApi
+    {
+        if ($this->properties === null) {
+            $this->properties = new PropertiesApi($this->httpClient);
+        }
+
+        return $this->properties;
+    }
+
+    public function tickets(): TicketsApi
+    {
+        if ($this->tickets === null) {
+            $this->tickets = new TicketsApi($this->httpClient);
+        }
+
+        return $this->tickets;
+    }
+
+    public function leads(): LeadsApi
+    {
+        if ($this->leads === null) {
+            $this->leads = new LeadsApi($this->httpClient);
+        }
+
+        return $this->leads;
     }
 
     public function tasks(): TasksApi

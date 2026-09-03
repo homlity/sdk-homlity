@@ -73,9 +73,7 @@ final class CurlHttpClient implements HttpClientInterface
     {
         $headers = [
             'Accept' => 'application/json',
-            // The OpenAPI uses both `apikey` and `X-API-KEY` names in different sections.
-            'apikey' => $this->config->apiKey(),
-            'X-API-KEY' => $this->config->apiKey(),
+            ...$this->config->authenticationHeaders(),
         ];
 
         if ($hasJsonBody) {

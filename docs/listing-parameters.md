@@ -1,4 +1,10 @@
-# Parametros de Inmuebles
+<p align="center">
+  <img src="assets/homlity-developers.png" width="360" alt="Homlity para desarrolladores">
+</p>
+
+# Parámetros de inmuebles
+
+[Inicio](index.md) · [Clases y métodos](public-api.md) · [Tareas y webhooks](webhooks.md)
 
 Basado en `components.schemas.ListingPOST`, `ListingPATCH`, `ListingStatus`, `ValidateListig` y operaciones `/listing*` del OpenAPI oficial.
 

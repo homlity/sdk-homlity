@@ -19,11 +19,18 @@ class ApiException extends \RuntimeException
     public static function fromResponse(string $method, string $path, ApiResponse $response): self
     {
         $status = $response->statusCode();
-        $body = $response->body();
-        $shortBody = \substr($body, 0, 500);
+        $exceptionClass = match ($status) {
+            401 => AuthenticationException::class,
+            403 => AuthorizationException::class,
+            404 => NotFoundException::class,
+            409 => ConflictException::class,
+            422 => ValidationException::class,
+            429 => RateLimitException::class,
+            default => $status >= 500 ? ServerException::class : self::class,
+        };
 
-        return new self(
-            \sprintf('API request failed [%s %s] with status %d. Response: %s', $method, $path, $status, $shortBody),
+        return new $exceptionClass(
+            \sprintf('API request failed [%s %s] with status %d.', $method, $path, $status),
             $response
         );
     }

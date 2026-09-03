@@ -25,6 +25,7 @@ Con el paquete puedes:
 - consultar clientes y agentes, y verificar clientes por documento;
 - crear leads y relacionarlos con un inmueble o cliente cuando el backend lo admite;
 - crear, listar y consultar tickets;
+- consultar canales de ingreso y categorías de PQR;
 - consultar tareas asíncronas y procesar webhooks;
 - sincronizar propiedades y consultar analítica en un sitio WordPress con Homlity.
 
@@ -68,14 +69,30 @@ use Homlity\Sdk\Filter\PropertyFilters;
 use Homlity\Sdk\HomlityClient;
 use Homlity\Sdk\Request\CreateLeadRequest;
 
-$sdk = new HomlityClient(
-    Config::forTenantApi($_ENV['HOMLITY_ACCESS_TOKEN'])
-);
+$token = $_ENV['HOMLITY_ACCESS_TOKEN'];
+$config = Config::forTenantApi($token);
+$client = new HomlityClient($config);
 
-$profile = $sdk->company()->profile();
+$profile = $client->company()->profile();
 echo $profile->name();
 
-$properties = $sdk->properties()->search(new PropertyFilters(
+$channels = $client->channels()->list();
+
+foreach ($channels as $channel) {
+    echo $channel->id();
+    echo $channel->name();
+}
+
+$categories = $client->tickets()->categories();
+
+foreach ($categories as $category) {
+    echo $category->id();
+    echo $category->name();
+    echo $category->description() ?? '';
+    echo $category->parentId() ?? '';
+}
+
+$properties = $client->properties()->search(new PropertyFilters(
     search: 'apartamento Laureles',
     propertyTypeIds: [2],
     salePriceMin: 300_000_000,
@@ -85,10 +102,10 @@ $properties = $sdk->properties()->search(new PropertyFilters(
     perPage: 20,
 ));
 
-$verification = $sdk->clients()->verifyDocument('AB-123456', 'CE');
+$verification = $client->clients()->verifyDocument('AB-123456', 'CE');
 
 if (!$properties->isEmpty()) {
-    $result = $sdk->leads()->create(new CreateLeadRequest(
+    $result = $client->leads()->create(new CreateLeadRequest(
         name: 'Ada Lovelace',
         email: 'ada@example.com',
         propertyId: $properties->items()[0]->id(),
@@ -98,6 +115,10 @@ if (!$properties->isEmpty()) {
     echo $result->lead()->id();
 }
 ```
+
+Las aplicaciones consumidoras, como Homlity Chat, deben guardar los IDs que
+devuelven estas APIs. No deben depender de IDs hardcodeados para canales o
+categorías de PQR.
 
 La guía de [recursos tenant](docs/tenant-resources.md) contiene todos los
 filtros, DTO, relaciones, respuestas y contratos pendientes del backend.

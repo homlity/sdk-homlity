@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Homlity\Sdk;
 
 use Homlity\Sdk\Api\CategoriesApi;
+use Homlity\Sdk\Api\ChannelsApi;
 use Homlity\Sdk\Api\ClientsApi;
 use Homlity\Sdk\Api\CompanyApi;
 use Homlity\Sdk\Api\ListingsApi;
@@ -28,6 +29,7 @@ final class HomlityClient
     private ?ClientsApi $clients = null;
     private ?CompanyApi $company = null;
     private ?CategoriesApi $categories = null;
+    private ?ChannelsApi $channels = null;
     private ?LocationsApi $locations = null;
     private ?PropertiesApi $properties = null;
     private ?TicketsApi $tickets = null;
@@ -91,6 +93,15 @@ final class HomlityClient
         }
 
         return $this->categories;
+    }
+
+    public function channels(): ChannelsApi
+    {
+        if ($this->channels === null) {
+            $this->channels = new ChannelsApi($this->httpClient);
+        }
+
+        return $this->channels;
     }
 
     public function locations(): LocationsApi

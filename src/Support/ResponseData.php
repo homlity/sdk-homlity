@@ -19,4 +19,16 @@ final class ResponseData
 
         return $response;
     }
+
+    /** @return list<mixed> */
+    public static function list(mixed $response): array
+    {
+        if (!is_array($response)) {
+            return [];
+        }
+
+        $data = array_key_exists('data', $response) ? $response['data'] : $response;
+
+        return is_array($data) && array_is_list($data) ? $data : [];
+    }
 }

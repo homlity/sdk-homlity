@@ -2,7 +2,7 @@
   <img src="assets/homlity-developers.png" width="360" alt="Homlity para desarrolladores">
 </p>
 
-# Recursos tenant: perfil, inmuebles, tickets, clientes y leads
+# Recursos tenant: perfil, catálogos, inmuebles, tickets, clientes y leads
 
 [Inicio](index.md) · [Clases y métodos](public-api.md) · [Mapa de endpoints](api-reference.md)
 
@@ -34,10 +34,12 @@ La configuración histórica `new Config(apiKey: ...)` conserva los headers
 | SDK | HTTP | Aislamiento observado en backend |
 | --- | --- | --- |
 | `company()->profile` | `GET /v1/inmobiliaria/profile` | inmobiliaria derivada exclusivamente de `Auth::user()->id_inmobiliaria` |
+| `channels()->list` | `GET /v1/channels` | catálogo disponible para el tenant autenticado |
 | `properties()->list/search` | `GET /v1/propertys` | `where('id_inmobiliaria', Auth::user()->id_inmobiliaria)` |
 | `properties()->get/getByCode` | `GET /v1/integrations/properties/{id_or_code}` | ID/código buscado dentro del tenant autenticado |
 | `tickets()->create` | `POST /v1/tickets` | el backend asigna `id_inmobiliaria` desde el usuario |
 | `tickets()->list/get` | `GET /v1/tickets[/{id}]` | consultas limitadas al tenant y usuario autenticados |
+| `tickets()->categories` | `GET /v1/tickets/categories` | categorías de PQR disponibles para el tenant autenticado |
 | `clients()->verifyDocument` | `GET /v1/clients?q=...` | búsqueda SQL dentro del tenant y visibilidad del usuario |
 | `leads()->create` | `POST /v1/leads` | `LeadCreator` asigna el tenant autenticado |
 | lead con inmueble | `POST /sistema/inmuebles/{id}/leads` | middleware `tenant.ownership` y lookup tenant-scoped |
@@ -127,6 +129,30 @@ ruta filtros de país/departamento, área privada, fecha de creación, publicado
 destacado, coordenadas/radio, referencia externa ni ordenamiento configurable.
 
 ## Tickets
+
+Los canales de ingreso y las categorías de PQR se consultan en vivo. Sus DTO
+conservan también el elemento original mediante `raw()`:
+
+```php
+$channels = $sdk->channels()->list();
+
+foreach ($channels as $channel) {
+    echo $channel->id();
+    echo $channel->name();
+}
+
+$categories = $sdk->tickets()->categories();
+
+foreach ($categories as $category) {
+    echo $category->id();
+    echo $category->name();
+    echo $category->description() ?? '';
+    echo $category->parentId() ?? '';
+}
+```
+
+Las aplicaciones consumidoras, incluido Homlity Chat, deben persistir los IDs
+devueltos por estos endpoints y no usar IDs hardcodeados.
 
 El contrato JSON actual de creación admite asunto, cuerpo, categoría, metadata,
 destinatarios y referencias de lead por nombre más teléfono o correo:

@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Homlity\Sdk\Api;
 
 use Homlity\Sdk\Data\PaginatedResult;
+use Homlity\Sdk\Data\TicketCategory;
 use Homlity\Sdk\Data\TicketSnapshot;
 use Homlity\Sdk\Exception\ValidationException;
 use Homlity\Sdk\Filter\TicketFilters;
@@ -38,5 +39,22 @@ final class TicketsApi extends BaseApi
         $response = $this->send('GET', '/v1/tickets/' . $ticketId);
 
         return TicketSnapshot::fromArray(ResponseData::object($response));
+    }
+
+    /** @return list<TicketCategory> */
+    public function categories(): array
+    {
+        $response = $this->send('GET', '/v1/tickets/categories');
+        $categories = [];
+
+        foreach (ResponseData::list($response) as $item) {
+            if (!is_array($item)) {
+                throw new ValidationException('Ticket category data items must be objects.');
+            }
+
+            $categories[] = TicketCategory::fromArray($item);
+        }
+
+        return $categories;
     }
 }
